@@ -16,17 +16,25 @@ async function call(method: string, path: string, body?: unknown) {
 }
 
 const systemPrompt = readFileSync(new URL("../agent/vaani_system_prompt.txt", import.meta.url), "utf8");
-const greeting = "Hello, Aangan Studio. I'm an AI assistant, and this call may be recorded so we can help you better. How can I help you today?";
+const greeting = "Hello, Aangan Studio. I'm an AI assistant, and this call may be recorded. How can I help you today?";
 
 const persona = {
   identity: {
     system_prompt: systemPrompt,
     personality: { tone: "warm", style: "brief and professional" },
-    greeting_message: { agent_message: greeting, agent_speech_delay: 0, interruptible: false, let_user_speak_first: false },
+    greeting_message: { agent_message: greeting, agent_speech_delay: 0, user_speech_delay: 0, interruptible: true, let_user_speak_first: false },
   },
-  senses_capabilities: { language: "en", auto_detect: true },
+  senses_capabilities: { language: "en", auto_detect: true, brain: { llm: { primary: { parameters: { temperature: 0.4 } } } } },
 };
-const experience = { settings: { call_settings: { max_call_duration: 10, max_duration_enabled: true, max_duration_action: "hang_up" } } };
+// Silence timers: the defaults (warn after 3s, hang up after 10s) cut callers off while they were still starting to speak.
+const idle = {
+  pulse_check: true, end_conversation_on_idle: true,
+  initial_idle_call_warning_timeout: 15, initial_idle_call_hungup_timeout: 45, initial_warning_message: "Hello, are you still there?",
+  idle_call_warning_timeout: 12, idle_call_hangup_timeout: 25,
+  idle_call_warning_message: "Are you still there?",
+  idle_call_hangup_message: "I'll let you go for now. Please call Aangan Studio again whenever you're ready. Goodbye.",
+};
+const experience = { settings: { idle_conversation_settings: idle, call_settings: { max_call_duration: 10, max_duration_enabled: true, max_duration_action: "hang_up" } } };
 const dp = (name: string, prompt: string, values?: string[]) => ({ name, prompt, nullable: true, ...(values ? { values } : {}) });
 const analysis = {
   extraction: {
