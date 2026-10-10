@@ -72,3 +72,20 @@ test("withheld numbers never merge", () => {
     ], 24, 10);
   assert.equal(g.length, 2);
 });
+
+// A garbled neighbourhood must not block a caller who clearly said they are in Pune (found on a real call: "Hindu border" for Hinjewadi).
+test("unrecognised locality + city Pune -> Qualified with adjoining_area flag and a note to confirm", () => {
+  const r = qualify({ ...base, locality: "Hindu border", city: "Pune" }, asOf, settings, area);
+  assert.equal(r.verdict, "Qualified");
+  assert.ok(r.flags.includes("adjoining_area"));
+  assert.ok(r.notes.some((n) => n.includes("Hindu border")));
+});
+
+test("no locality but city Pune -> Qualified with flag; no city at all -> still Needs human", () => {
+  assert.equal(qualify({ ...base, locality: null, city: "Pune" }, asOf, settings, area).verdict, "Qualified");
+  assert.equal(qualify({ ...base, locality: null, city: null }, asOf, settings, area).verdict, "Needs human");
+});
+
+test("city outside the service area is declined even when the neighbourhood is unknown", () => {
+  assert.equal(qualify({ ...base, locality: null, city: "Nashik" }, asOf, settings, area).verdict, "Not qualified");
+});

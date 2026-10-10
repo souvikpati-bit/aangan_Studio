@@ -22,7 +22,8 @@ Return ONLY one JSON object, no prose. Rules:
 - Property type: a restaurant, hotel, retail shop or gym is that type, not "office". A coworking pod or startup office is "office".
 - home_kind: "villa" for an independent house or villa, else "apartment" for a flat.
 - scope_kind: full_home = whole flat/house; partial = specific rooms or a floor; single_room = one room; office = commercial fitout. rooms_count = number of rooms named.
-JSON keys: call_type, wants_execution, property_type (home|office|restaurant|hotel|retail|gym|other), home_kind (apartment|villa), locality, scope_kind (full_home|partial|single_room|office|unknown), rooms_count, sqft, needed_by, needed_by_words, start_by, budget_max_inr, decision_maker, decision_maker_note, referrer, price_asked, follow_up, follow_up_note, service_recovery, key_facts_missing, angry_or_bad_line, conf.`;
+- city: the city the caller named (Pune, Pimpri-Chinchwad, Nashik, Mumbai...). null if none. locality is only the neighbourhood or colony, copied exactly as written in the transcript even if it looks misspelled.
+JSON keys: call_type, wants_execution, property_type (home|office|restaurant|hotel|retail|gym|other), home_kind (apartment|villa), city, locality, scope_kind (full_home|partial|single_room|office|unknown), rooms_count, sqft, needed_by, needed_by_words, start_by, budget_max_inr, decision_maker, decision_maker_note, referrer, price_asked, follow_up, follow_up_note, service_recovery, key_facts_missing, angry_or_bad_line, conf.`;
 
 export interface ExtractOptions {
   apiKey: string;

@@ -33,7 +33,7 @@ export default function Header() {
     <header className="top">
       <div className="wrap between" style={{ alignItems: "center", paddingTop: 12, paddingBottom: 12 }}>
         <div className="row" style={{ gap: 24 }}>
-          <span className="serif" style={{ fontSize: 22 }}>Aangan</span>
+          <span className="mark">Aangan<i aria-hidden="true" /></span>
           {!onLogin && (
             <nav aria-label="Main" className="row" style={{ gap: 4 }}>
               <Link href="/" aria-current={path === "/" ? "page" : undefined}>Leads</Link>

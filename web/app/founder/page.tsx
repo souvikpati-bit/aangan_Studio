@@ -4,6 +4,9 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { dur, ease, reducedMotion } from "../../lib/motion";
+import Cinema from "../../components/Cinema";
+import Reveal from "../../components/Reveal";
+import Lenis from "lenis";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -39,22 +42,32 @@ export default function Founder() {
       });
     });
     if (still) return;
+    // Smooth, weighted scrolling on this long page only, wired to GSAP so scroll effects stay in sync.
+    const lenis = new Lenis({ duration: 1.1 });
+    lenis.on("scroll", ScrollTrigger.update);
+    const tick = (t: number) => lenis.raf(t * 1000);
+    gsap.ticker.add(tick);
+    gsap.ticker.lagSmoothing(0);
+    gsap.to("[data-parallax]", { yPercent: -14, ease: "none", scrollTrigger: { trigger: ".founder-hero", start: "top top", end: "bottom top", scrub: true } });
     gsap.from(".reveal", { y: 24, opacity: 0, duration: dur.ui, ease: ease.in, stagger: 0.06 });
     gsap.from(".bar", { scaleY: 0, duration: 0.9, ease: ease.reveal, stagger: 0.15, scrollTrigger: { trigger: ".bars", start: "top 85%", once: true } });
+    return () => { lenis.destroy(); gsap.ticker.remove(tick); };
   }, { scope: root });
 
   const bars = [{ label: "Within 1 hour", v: 12 }, { label: "Same day", v: 7 }, { label: "Next day", v: 3 }];
 
   return (
     <div ref={root}>
-      <div className="reveal">
-        <h1 style={{ fontSize: "clamp(32px, 6vw, 48px)", lineHeight: 1.1 }}>Founder view</h1>
-        <p className="muted" style={{ maxWidth: "58ch", margin: "8px 0 20px" }}>
-          Faster answers only count if revenue rises. This page tracks the whole chain: response, meetings, won value and what the tool costs.
-        </p>
-        <div className="banner" style={{ marginBottom: 24 }}>Sample figures to show the layout. Real numbers appear once calls are live.</div>
-      </div>
+      <Cinema className="founder-hero hero on-photo" images={["/media/living-classic.jpg", "/media/living-oak.jpg", "/media/hero-entry.jpg"]} interval={8} label="Elegant living rooms">
+        <div className="hero-in" data-parallax>
+          <span className="eyebrow">For the founder</span>
+          <Reveal text="Faster answers, measured in revenue." />
+          <p className="lede">Quick replies only count if more projects are won. This page follows the whole chain: response, meetings, won value, and what the tool costs.</p>
+          <span className="chip" style={{ alignSelf: "flex-start", fontSize: 12 }}>Sample figures · real numbers appear as calls come in</span>
+        </div>
+      </Cinema>
 
+      <div className="metrics-float">
       <div className="metrics">
         {tiles.map((t, i) => (
           <div key={t.label} className="card metric reveal">
@@ -63,6 +76,8 @@ export default function Founder() {
             <div className="muted small">{t.note}</div>
           </div>
         ))}
+      </div>
+
       </div>
 
       <section className="card reveal" style={{ marginTop: 16 }} aria-labelledby="conv">

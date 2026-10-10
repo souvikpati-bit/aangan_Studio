@@ -17,4 +17,5 @@ export async function middleware(req: NextRequest) {
   return NextResponse.redirect(url);
 }
 
-export const config = { matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"] };
+// Interior photographs under /media are public (they appear on the sign-in page), so they skip the login check.
+export const config = { matcher: ["/((?!_next/static|_next/image|favicon.ico|media/).*)"] };

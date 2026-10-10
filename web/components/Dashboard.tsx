@@ -6,6 +6,7 @@ import { useGSAP } from "@gsap/react";
 import { TABS, Tab, inTab } from "../lib/types";
 import { dur, ease, reducedMotion, stagger } from "../lib/motion";
 import LeadCard, { LeadView } from "./LeadCard";
+import Hero from "./Hero";
 
 gsap.registerPlugin(useGSAP, Flip);
 
@@ -89,14 +90,11 @@ export default function Dashboard({ initial }: { initial: LeadView[] }) {
 
   return (
     <div ref={root}>
-      <div className="reveal">
-        <h1 style={{ fontSize: "clamp(32px, 6vw, 48px)", lineHeight: 1.1 }}>Today&apos;s enquiries</h1>
-        <p className="muted" style={{ maxWidth: "58ch", margin: "8px 0 20px" }}>
-          Every call, decided by Nikhil&apos;s five checks. Hover a check to see why. Each ✓ passed, ✕ failed, ? unclear.
-        </p>
+      <div className="reveal" style={{ marginBottom: 28 }}>
+        <Hero total={leads.filter((l) => !l.demo).length} qualified={counts["Qualified"]} needsHuman={counts["Needs human"]} escalations={counts["Escalations"]} />
       </div>
       <div className="banner reveal" style={{ marginBottom: 20 }}>
-        Sample data from your Neon database: the 20 real September calls plus two labelled demo cases. No live calls yet.
+        The 20 real September calls and two labelled demo cases are shown with your live calls. New calls appear at the top within seconds.
       </div>
       {saveError && <div className="banner" role="alert" style={{ marginBottom: 20 }}>{saveError}</div>}
 

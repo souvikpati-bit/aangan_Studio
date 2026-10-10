@@ -1,6 +1,6 @@
 # Extraction report (live, gemini)
 
-Matched 20/20. Tokens: 22865 in, 5871 out.
+Matched 20/20. Tokens: 23905 in, 6011 out.
 
 | Call | Expected | Got | Result | Reason | Flags |
 |---|---|---|---|---|---|

@@ -36,11 +36,14 @@ export default function LeadCard({ lead, fresh, onChange }: { lead: LeadView; fr
   const showChecks = lead.verdict !== "Escalate" && lead.verdict !== "Missed" && lead.verdict !== "Closed";
 
   return (
-    <article className={`card lead-card${fresh ? " flash" : ""}`} data-flip-id={lead.id} aria-label={`${lead.name}, ${lead.verdict}`}>
+    <article className={`card lead-card${fresh ? " flash" : ""}`} data-v={lead.verdict} data-flip-id={lead.id} aria-label={`${lead.name}, ${lead.verdict}`}>
       <div className="between">
-        <div style={{ minWidth: 0 }}>
-          <h3 style={{ fontSize: 24 }}>{lead.name}</h3>
-          <p className="muted small" style={{ margin: "2px 0 0" }}>{lead.property}</p>
+        <div className="row" style={{ gap: 14, flexWrap: "nowrap", minWidth: 0 }}>
+          <span className="avatar" aria-hidden="true">{(lead.name.match(/[A-Za-z]/)?.[0] ?? "?").toUpperCase()}</span>
+          <div style={{ minWidth: 0 }}>
+            <h3 style={{ fontSize: 24, lineHeight: 1.15 }}>{lead.name}</h3>
+            <p className="muted small" style={{ margin: "2px 0 0" }}>{lead.property}</p>
+          </div>
         </div>
         <span className={`pill ${verdictClass[lead.verdict]}`}>{lead.verdict}</span>
       </div>

@@ -1,6 +1,9 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import Cinema from "../../components/Cinema";
+import Reveal from "../../components/Reveal";
+import Magnetic from "../../components/Magnetic";
 
 type Phase = "idle" | "connecting" | "live" | "saving" | "done" | "error";
 type Result = { status: string; verdict?: string; leadRef?: string; message?: string };
@@ -74,50 +77,58 @@ export default function Talk() {
   const mm = String(Math.floor(secs / 60)).padStart(2, "0"), ss = String(secs % 60).padStart(2, "0");
 
   return (
-    <div style={{ maxWidth: 560, margin: "4vh auto 0" }}>
-      <h1 style={{ fontSize: "clamp(30px, 6vw, 44px)", lineHeight: 1.1 }}>Talk to the agent</h1>
-      <p className="muted" style={{ margin: "8px 0 24px" }}>
-        Press start and speak as a caller would. When you finish, the call is saved to the dashboard with its transcript and recording, and a brief is emailed to you.
-      </p>
+    <div>
+      <Cinema className="talk-shell on-photo" images={["/media/living-dusk.jpg", "/media/living-airy.jpg", "/media/living-oak.jpg"]} interval={9} label="A quiet modern living room">
+        <div style={{ minHeight: "min(80vh, 760px)", display: "grid", placeItems: "center", padding: "clamp(16px, 4vw, 40px)" }}>
+          <div className="glass talk-card">
+            <span className="eyebrow" style={{ color: "var(--brass)" }}>Live demo</span>
+            <Reveal as="h1" text="Talk to the agent" style={{ fontSize: "clamp(32px, 6vw, 46px)", lineHeight: 1.05, fontWeight: 300 }} />
 
-      <div className="card" style={{ display: "grid", gap: 16, textAlign: "center" }}>
-        {phase === "idle" || phase === "error" ? (
-          <button className="btn primary" onClick={start}>Start call</button>
-        ) : phase === "connecting" ? (
-          <p role="status">Connecting…</p>
-        ) : phase === "live" ? (
-          <>
-            <p role="status" className="num" style={{ fontSize: 28, margin: 0 }}>● Live {mm}:{ss}</p>
-            <p className="muted small" style={{ margin: 0 }}>Speak normally. The agent will answer.</p>
-            <button className="btn" onClick={end}>End call</button>
-          </>
-        ) : phase === "saving" ? (
-          <p role="status">Saving your call… this takes up to a minute while Vaani writes the transcript.</p>
-        ) : (
-          <>
-            {result?.status === "processed" ? (
-              <p role="status"><b>Saved.</b> Verdict: <b>{result.verdict}</b>. It is now on the dashboard, and the brief email is on its way.</p>
+            {phase === "idle" || phase === "error" ? (
+              <>
+                <p className="muted" style={{ margin: 0 }}>Speak as a caller would. When you finish, the call is saved to the dashboard with its transcript and recording, and a brief is emailed to the designer.</p>
+                <Magnetic><button className="btn primary" onClick={start} style={{ minWidth: 200 }}>Start call</button></Magnetic>
+              </>
+            ) : phase === "connecting" ? (
+              <p role="status" className="muted" style={{ margin: 0 }}>Connecting…</p>
+            ) : phase === "live" ? (
+              <>
+                <p role="status" className="num" style={{ fontSize: 30, margin: 0 }}><span className="live-dot" aria-hidden="true" />Live {mm}:{ss}</p>
+                <div className="wave" aria-hidden="true">{Array.from({ length: 21 }).map((_, i) => <i key={i} />)}</div>
+                <p className="muted small" style={{ margin: 0 }}>Speak normally. The agent will answer.</p>
+                <button className="btn" onClick={end}>End call</button>
+              </>
+            ) : phase === "saving" ? (
+              <>
+                <div className="wave" aria-hidden="true">{Array.from({ length: 11 }).map((_, i) => <i key={i} />)}</div>
+                <p role="status" className="muted" style={{ margin: 0 }}>Saving your call… this takes up to a minute while the transcript is written.</p>
+              </>
             ) : (
-              <p role="status">{result?.message ?? "Done."}</p>
+              <>
+                {result?.status === "processed" ? (
+                  <p role="status" style={{ margin: 0 }}><b>Saved.</b> Verdict: <b>{result.verdict}</b>. It is on the dashboard, and the brief email is on its way.</p>
+                ) : (
+                  <p role="status" style={{ margin: 0 }}>{result?.message ?? "Done."}</p>
+                )}
+                <div className="row" style={{ justifyContent: "center" }}>
+                  <Link className="btn primary" href="/" style={{ display: "inline-flex", alignItems: "center", textDecoration: "none" }}>Open the dashboard</Link>
+                  <button className="btn" onClick={() => { setPhase("idle"); setResult(null); }}>Another call</button>
+                </div>
+              </>
             )}
-            <div className="row" style={{ justifyContent: "center" }}>
-              <Link className="btn primary" href="/" style={{ display: "inline-flex", alignItems: "center", textDecoration: "none" }}>Open the dashboard</Link>
-              <button className="btn" onClick={() => { setPhase("idle"); setResult(null); }}>Another call</button>
-            </div>
-          </>
-        )}
-        {msg && <div className="banner" role="alert">{msg}</div>}
-      </div>
+            {msg && <div className="banner" role="alert">{msg}</div>}
 
-      <details style={{ marginTop: 24 }}>
-        <summary style={{ cursor: "pointer", minHeight: 44, display: "flex", alignItems: "center" }}>Made a call inside Vaani instead? Add it here</summary>
-        <form onSubmit={importCall} style={{ display: "grid", gap: 8, paddingTop: 8 }}>
-          <label className="small muted" htmlFor="cid">Session ID: in Vaani, open Conversations → History, open the call, and copy the ID at the top (looks like webrtc-1791652638-f1903889)</label>
-          <input id="cid" className="field" value={importId} onChange={(e) => setImportId(e.target.value)} placeholder="webrtc-…" />
-          <button className="btn sm" type="submit" disabled={!importId.trim() || phase === "saving"}>Add this call</button>
-        </form>
-      </details>
-
+            <details style={{ textAlign: "left" }}>
+              <summary style={{ cursor: "pointer", minHeight: 44, display: "flex", alignItems: "center", fontSize: 13 }} className="muted">Made a call inside Vaani instead? Add it here</summary>
+              <form onSubmit={importCall} style={{ display: "grid", gap: 8, paddingTop: 8 }}>
+                <label className="small muted" htmlFor="cid">In Vaani, open Conversations → History, open the call, and copy the ID at the top (like webrtc-1791652638-f1903889)</label>
+                <input id="cid" className="field" value={importId} onChange={(e) => setImportId(e.target.value)} placeholder="webrtc-…" />
+                <button className="btn sm" type="submit" disabled={!importId.trim() || phase === "saving"}>Add this call</button>
+              </form>
+            </details>
+          </div>
+        </div>
+      </Cinema>
       <div ref={audioHost} aria-hidden="true" />
     </div>
   );

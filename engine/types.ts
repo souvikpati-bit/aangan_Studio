@@ -9,6 +9,7 @@ export interface Facts {
   property_type?: "home" | "office" | "restaurant" | "hotel" | "retail" | "gym" | "other" | null;
   home_kind?: "apartment" | "villa" | null;
   locality?: string | null;
+  city?: string | null; // the city the caller named (Pune, Pimpri-Chinchwad, Nashik...), separate from the neighbourhood
   scope_kind?: "full_home" | "partial" | "single_room" | "office" | "unknown" | null;
   rooms_count?: number | null;
   sqft?: number | null;

@@ -1,5 +1,8 @@
 "use client";
 import { useState } from "react";
+import Cinema from "../../components/Cinema";
+import Reveal from "../../components/Reveal";
+import Magnetic from "../../components/Magnetic";
 
 export default function Login() {
   const [error, setError] = useState<string | null>(null);
@@ -21,17 +24,30 @@ export default function Login() {
   }
 
   return (
-    <div style={{ maxWidth: 420, margin: "10vh auto 0" }}>
-      <h1 style={{ fontSize: 40, lineHeight: 1.1 }}>Aangan Leads</h1>
-      <p className="muted" style={{ margin: "8px 0 24px" }}>Sign in to see today&apos;s enquiries.</p>
-      <form className="card" onSubmit={submit} style={{ display: "grid", gap: 12 }}>
-        <label className="small muted" htmlFor="email">Email</label>
-        <input id="email" name="email" type="email" autoComplete="username" required className="field" />
-        <label className="small muted" htmlFor="password">Password</label>
-        <input id="password" name="password" type="password" autoComplete="current-password" required className="field" />
-        {error && <div className="banner" role="alert">{error}</div>}
-        <button className="btn primary" disabled={busy} type="submit">{busy ? "Signing in…" : "Sign in"}</button>
-      </form>
+    <div className="login-shell">
+      <Cinema className="login-art on-photo" images={["/media/login-portrait.jpg", "/media/hero-entry.jpg", "/media/living-dusk.jpg"]} interval={8} label="A calm, modern living room">
+        <div style={{ height: "100%", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+          <span className="mark" style={{ color: "var(--on-photo)" }}>Aangan<i aria-hidden="true" /></span>
+          <div style={{ display: "grid", gap: 14 }}>
+            <span className="eyebrow">Interior design · Pune</span>
+            <Reveal as="h2" text="Rooms that feel like home." delay={0.2} />
+          </div>
+        </div>
+      </Cinema>
+
+      <div className="login-form">
+        <form onSubmit={submit} style={{ display: "grid", gap: 14 }}>
+          <span className="eyebrow" style={{ color: "var(--brass)" }}>Aangan Studio</span>
+          <Reveal text="Welcome back" style={{ fontSize: "clamp(34px, 5vw, 46px)", lineHeight: 1.05, fontWeight: 300 }} />
+          <p className="muted" style={{ margin: "0 0 8px" }}>Sign in to see today&apos;s enquiries, with every call transcribed and recorded.</p>
+          <label className="small muted" htmlFor="email">Email</label>
+          <input id="email" name="email" type="email" autoComplete="username" required className="field" />
+          <label className="small muted" htmlFor="password">Password</label>
+          <input id="password" name="password" type="password" autoComplete="current-password" required className="field" />
+          {error && <div className="banner" role="alert">{error}</div>}
+          <Magnetic strength={0.12}><button className="btn primary" disabled={busy} type="submit" style={{ width: "100%" }}>{busy ? "Signing in…" : "Sign in"}</button></Magnetic>
+        </form>
+      </div>
     </div>
   );
 }

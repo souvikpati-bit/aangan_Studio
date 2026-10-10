@@ -19,6 +19,15 @@ function localityClass(locality: string | null | undefined, area: ServiceArea): 
   return "unknown";
 }
 
+/** When the neighbourhood is unknown or garbled by speech recognition, the city the caller named still tells us a lot. */
+function cityClass(city: string | null | undefined, area: ServiceArea): "adjoining" | "outside" | "unknown" {
+  if (!city) return "unknown";
+  const c = norm(city);
+  if (area.outside.some((x) => c.includes(x))) return "outside";
+  if (/(pune|pimpri|chinchwad|pcmc)/.test(c)) return "adjoining";
+  return "unknown";
+}
+
 /** Backend-only budget floor for the stated scope. Never spoken to a caller. */
 export function budgetFloor(f: Facts, s: Settings): number | null {
   if (f.property_type === "office") return f.sqft ? f.sqft * s.budget.commercial_floor_per_sqft_inr : null;
@@ -57,18 +66,20 @@ export function qualify(f: Facts, asOf: Date, s: Settings, area: ServiceArea): Q
 
   // C2 service area + project type + commercial size
   let c2: Criterion;
-  const loc = localityClass(f.locality, area);
+  let loc = localityClass(f.locality, area);
+  if (loc === "unknown") loc = cityClass(f.city, area);
   if (f.property_type && s.commercial.out_of_scope_types.includes(f.property_type))
     c2 = crit("fail", `${f.property_type} projects are out of scope`, conf("c2"));
-  else if (loc === "outside") c2 = crit("fail", `Outside Pune/PCMC (${f.locality})`, conf("c2"));
+  else if (loc === "outside") c2 = crit("fail", `Outside Pune/PCMC (${f.locality ?? f.city})`, conf("c2"));
   else if (f.property_type === "office" && f.sqft != null && f.sqft < s.commercial.min_sqft)
     c2 = crit("fail", `Commercial ${f.sqft} sq ft is below the ${s.commercial.min_sqft} sq ft minimum`, conf("c2"));
   else if (f.property_type === "office" && f.sqft != null && f.sqft > s.commercial.max_sqft)
     c2 = crit("fail", `Commercial ${f.sqft} sq ft is above ~${s.commercial.max_sqft} sq ft`, Math.min(conf("c2"), 0.7));
   else if (loc === "listed") c2 = crit("pass", `In service area (${f.locality})`, conf("c2"));
   else if (loc === "adjoining") {
-    c2 = crit("pass", `${f.locality} is in Pune but not on the list (adjoining area)`, conf("c2"));
+    c2 = crit("pass", `${f.locality ?? f.city} is in Pune but not on the list (adjoining area)`, conf("c2"));
     flags.push("adjoining_area");
+    if (f.locality && localityClass(f.locality, area) === "unknown") notes.push(`Locality heard as "${f.locality}" and not recognised. Please confirm the exact area with the caller.`);
   } else c2 = crit("unclear", "Locality not captured or not recognised", conf("c2"));
 
   // C3 timeline, measured from as_of
