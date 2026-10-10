@@ -24,6 +24,8 @@ export default function Dashboard({ initial }: { initial: LeadView[] }) {
     const t = setInterval(async () => {
       if (saving.current > 0 || document.hidden) return;
       try {
+        // Quietly collect any finished calls that have not been saved yet, then reload the list.
+        await fetch("/api/sync", { method: "POST" }).catch(() => undefined);
         const r = await fetch("/api/leads", { cache: "no-store" });
         if (!r.ok) return;
         const fresh: LeadView[] = await r.json();

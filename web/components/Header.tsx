@@ -37,6 +37,7 @@ export default function Header() {
           {!onLogin && (
             <nav aria-label="Main" className="row" style={{ gap: 4 }}>
               <Link href="/" aria-current={path === "/" ? "page" : undefined}>Leads</Link>
+              <Link href="/talk" aria-current={path === "/talk" ? "page" : undefined}>Talk</Link>
               <Link href="/founder" aria-current={path === "/founder" ? "page" : undefined}>Founder</Link>
             </nav>
           )}

@@ -6,7 +6,7 @@ export type LeadRow = Lead & { overrideReason?: string; acked?: boolean };
 const SQL = `
 select l.ref, l.is_demo, l.name, l.phone, l.property_line, l.source, l.status, l.lead_flags, l.asked, l.price_asked,
        l.follow_up_note, l.consult_mode,
-       c.called_at_text, c.duration_text, c.summary, c.vaani_call_id, c.transcript, c.recording_url, c.started_at,
+       c.called_at_text, c.duration_text, c.summary, c.duration_s, c.vaani_call_id, c.transcript, c.recording_url, c.started_at,
        q.verdict, q.reason, q.score, q.notes, q.question, q.c1, q.c2, q.c3, q.c4, q.c5, q.override_reason,
        m.slot_text,
        e.promised_minutes, e.acknowledged_at,
@@ -29,7 +29,7 @@ export async function getLeads(): Promise<LeadRow[]> {
     name: r.name ?? "Name not captured",
     phone: r.phone ?? "Number withheld",
     calledAt: r.called_at_text ?? (r.started_at ? IST.format(new Date(r.started_at)) : ""),
-    duration: r.duration_text ?? "",
+    duration: r.duration_text ?? (r.duration_s ? `${Math.floor(r.duration_s / 60)} min ${String(r.duration_s % 60).padStart(2, "0")} s` : ""),
     summary: r.summary ?? "",
     source: r.source ?? "—",
     slot: r.slot_text,

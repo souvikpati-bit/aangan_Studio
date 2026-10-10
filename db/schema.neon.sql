@@ -142,3 +142,14 @@ create index on calls (lead_id);
 create index on qualification_results (lead_id);
 create index on meetings (lead_id);
 create index on leads (status);
+
+-- See db/migrations/002_pending_calls.sql
+create table if not exists pending_calls (
+  room_name text primary key,
+  source text not null default 'talk',
+  created_at timestamptz not null default now(),
+  finished_at timestamptz,
+  processed_at timestamptz,
+  attempts int not null default 0,
+  last_error text
+);

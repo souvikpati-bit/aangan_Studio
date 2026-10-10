@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node --test tests/golden.test.ts tests/extract.test.ts tests/agent_booking.test.ts tests/hubspot.test.ts",
+    "test": "node --test tests/golden.test.ts tests/extract.test.ts tests/agent_booking.test.ts tests/hubspot.test.ts tests/vaani.test.ts",
     "extract:live": "node --env-file=.env scripts/run_extraction.ts",
     "vaani:create": "node --env-file=.env scripts/vaani_create_agent.ts",
     "vaani:prompt": "node scripts/make_vaani_prompt.ts",
