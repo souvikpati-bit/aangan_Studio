@@ -1,0 +1,20 @@
+{
+  "version": "0.1.0",
+  "timezone": "Asia/Kolkata",
+  "timeline": { "fail_under_weeks": 6, "human_under_weeks": 8, "tight_under_weeks": 12 },
+  "commercial": { "min_sqft": 500, "max_sqft": 3000, "out_of_scope_types": ["restaurant", "hotel", "retail", "gym"] },
+  "budget": {
+    "per_room_floor_inr": 350000,
+    "full_home_floor_per_sqft_inr": 1800,
+    "commercial_floor_per_sqft_inr": 1200,
+    "clear_fail_fraction_of_floor": 0.5
+  },
+  "confidence": { "min_to_decline": 0.8 },
+  "score": { "pass": 20, "unclear": 12, "fail": 0, "pass_mark": 70 },
+  "flags": { "high_value_sqft": 4000, "vip_referrers": ["Vikram Agarwal"] },
+  "dedupe": { "same_number_window_hours": 24, "drop_merge_minutes": 10 },
+  "calling": { "outbound_start": "08:00", "outbound_end": "21:00", "callback_target_minutes": 5 },
+  "escalation": { "notify": "designer_email_only", "promise_office_hours": "within 15 minutes", "promise_after_hours": "by 10am tomorrow" },
+  "booking": { "site_visit_min": 60, "call_min": 30, "travel_buffer_min": 45, "min_notice_hours": 4 },
+  "limits": { "max_call_minutes": 10 }
+}

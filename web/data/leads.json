@@ -1,0 +1,1272 @@
+[
+ {
+  "id": "T01",
+  "demo": false,
+  "order": 0,
+  "name": "Priya",
+  "phone": "+91 98•••• ••10",
+  "calledAt": "2 Sep · 10:23 am",
+  "duration": "4 min 12 s",
+  "summary": "Wants the whole 3BHK redone (kitchen, living room, both bedrooms). Owner; husband agrees.",
+  "source": "Referral · Shruti Joshi",
+  "slot": "Fri 4 Sep · 6:00 pm",
+  "mode": "Site visit",
+  "verdict": "Qualified",
+  "reason": "All five criteria pass or are unclear only on budget/decision-maker",
+  "score": 100,
+  "flags": [],
+  "notes": [],
+  "question": null,
+  "criteria": {
+   "c1": {
+    "result": "pass",
+    "note": "Wants design + execution",
+    "confidence": 0.9
+   },
+   "c2": {
+    "result": "pass",
+    "note": "In service area (Kothrud)",
+    "confidence": 0.9
+   },
+   "c3": {
+    "result": "pass",
+    "note": "30.0 weeks available",
+    "confidence": 0.9
+   },
+   "c4": {
+    "result": "pass",
+    "note": "Budget not mentioned - treated as pass",
+    "confidence": 0.9
+   },
+   "c5": {
+    "result": "pass",
+    "note": "Owner; husband knows and agrees",
+    "confidence": 0.9
+   }
+  },
+  "property": "Kothrud · 1,400 sq ft · home",
+  "asked": [
+   "Name",
+   "Locality",
+   "Size",
+   "Scope",
+   "Timeline",
+   "Decision-maker"
+  ],
+  "status": "New",
+  "priceAsked": false,
+  "followUpNote": null,
+  "escalation": null
+ },
+ {
+  "id": "T02",
+  "demo": false,
+  "order": 1,
+  "name": "Name not captured",
+  "phone": "+91 98•••• ••11",
+  "calledAt": "3 Sep · 2:41 pm",
+  "duration": "5 min 08 s",
+  "summary": "Full redesign of a 2BHK. Pushed for a price twice, accepted the standard answer and booked.",
+  "source": "Instagram",
+  "slot": "Mon 7 Sep · 11:00 am",
+  "mode": "Call",
+  "verdict": "Qualified",
+  "reason": "All five criteria pass or are unclear only on budget/decision-maker",
+  "score": 100,
+  "flags": [
+   "price_asked",
+   "tight_timeline"
+  ],
+  "notes": [],
+  "question": null,
+  "criteria": {
+   "c1": {
+    "result": "pass",
+    "note": "Wants design + execution",
+    "confidence": 0.9
+   },
+   "c2": {
+    "result": "pass",
+    "note": "In service area (Wakad)",
+    "confidence": 0.9
+   },
+   "c3": {
+    "result": "pass",
+    "note": "8.4 weeks available",
+    "confidence": 0.9
+   },
+   "c4": {
+    "result": "pass",
+    "note": "Budget not mentioned - treated as pass",
+    "confidence": 0.9
+   },
+   "c5": {
+    "result": "pass",
+    "note": "Decision-maker confirmed",
+    "confidence": 0.9
+   }
+  },
+  "property": "Wakad · 950 sq ft · home",
+  "asked": [
+   "Locality",
+   "Size",
+   "Scope",
+   "Timeline",
+   "Decision-maker"
+  ],
+  "status": "New",
+  "priceAsked": true,
+  "followUpNote": null,
+  "escalation": null
+ },
+ {
+  "id": "T03",
+  "demo": false,
+  "order": 2,
+  "name": "Suresh Patil",
+  "phone": "+91 98•••• ••12",
+  "calledAt": "3 Sep · 4:15 pm",
+  "duration": "2 min 40 s",
+  "summary": "Home office and study in Nashik. Outside Pune and PCMC, declined politely.",
+  "source": "LinkedIn",
+  "slot": null,
+  "mode": null,
+  "verdict": "Not qualified",
+  "reason": "Service area: Outside Pune/PCMC (Nashik)",
+  "score": 80,
+  "flags": [],
+  "notes": [],
+  "question": null,
+  "criteria": {
+   "c1": {
+    "result": "pass",
+    "note": "Wants design + execution",
+    "confidence": 0.9
+   },
+   "c2": {
+    "result": "fail",
+    "note": "Outside Pune/PCMC (Nashik)",
+    "confidence": 0.9
+   },
+   "c3": {
+    "result": "pass",
+    "note": "No completion date given (start date or 'design now')",
+    "confidence": 0.9
+   },
+   "c4": {
+    "result": "pass",
+    "note": "Budget not mentioned - treated as pass",
+    "confidence": 0.9
+   },
+   "c5": {
+    "result": "pass",
+    "note": "Decision-maker confirmed",
+    "confidence": 0.9
+   }
+  },
+  "property": "Nashik · home",
+  "asked": [
+   "Name",
+   "Locality",
+   "Scope",
+   "Decision-maker"
+  ],
+  "status": "New",
+  "priceAsked": false,
+  "followUpNote": null,
+  "escalation": null
+ },
+ {
+  "id": "T04",
+  "demo": false,
+  "order": 3,
+  "name": "Name not captured",
+  "phone": "+91 98•••• ••13",
+  "calledAt": "4 Sep · 11:07 am",
+  "duration": "3 min 22 s",
+  "summary": "Wanted ideas for colours and furniture only. No execution, declined politely.",
+  "source": "—",
+  "slot": null,
+  "mode": null,
+  "verdict": "Not qualified",
+  "reason": "Real project: Advice only, no execution",
+  "score": 72,
+  "flags": [],
+  "notes": [],
+  "question": null,
+  "criteria": {
+   "c1": {
+    "result": "fail",
+    "note": "Advice only, no execution",
+    "confidence": 0.95
+   },
+   "c2": {
+    "result": "unclear",
+    "note": "Locality not captured or not recognised",
+    "confidence": 0.9
+   },
+   "c3": {
+    "result": "pass",
+    "note": "No completion date given (start date or 'design now')",
+    "confidence": 0.9
+   },
+   "c4": {
+    "result": "pass",
+    "note": "Budget not mentioned - treated as pass",
+    "confidence": 0.9
+   },
+   "c5": {
+    "result": "pass",
+    "note": "Decision-maker confirmed",
+    "confidence": 0.9
+   }
+  },
+  "property": "home",
+  "asked": [
+   "Scope",
+   "Decision-maker"
+  ],
+  "status": "New",
+  "priceAsked": false,
+  "followUpNote": null,
+  "escalation": null
+ },
+ {
+  "id": "T05",
+  "demo": false,
+  "order": 4,
+  "name": "Aarti Mehta",
+  "phone": "+91 98•••• ••14",
+  "calledAt": "5 Sep · 10:52 am",
+  "duration": "6 min 44 s",
+  "summary": "Full 4BHK redesign, moving back in by February. Prefers a site visit.",
+  "source": "Referral · Vikram Agarwal",
+  "slot": "Tue 8 Sep · 4:00 pm",
+  "mode": "Site visit",
+  "verdict": "Qualified",
+  "reason": "All five criteria pass or are unclear only on budget/decision-maker",
+  "score": 100,
+  "flags": [
+   "VIP"
+  ],
+  "notes": [],
+  "question": null,
+  "criteria": {
+   "c1": {
+    "result": "pass",
+    "note": "Wants design + execution",
+    "confidence": 0.9
+   },
+   "c2": {
+    "result": "pass",
+    "note": "In service area (Koregaon Park)",
+    "confidence": 0.9
+   },
+   "c3": {
+    "result": "pass",
+    "note": "25.1 weeks available",
+    "confidence": 0.9
+   },
+   "c4": {
+    "result": "pass",
+    "note": "Budget not mentioned - treated as pass",
+    "confidence": 0.9
+   },
+   "c5": {
+    "result": "pass",
+    "note": "Decision-maker confirmed",
+    "confidence": 0.9
+   }
+  },
+  "property": "Koregaon Park · 2,400 sq ft · home",
+  "asked": [
+   "Name",
+   "Locality",
+   "Size",
+   "Scope",
+   "Timeline",
+   "Decision-maker"
+  ],
+  "status": "New",
+  "priceAsked": false,
+  "followUpNote": null,
+  "escalation": null
+ },
+ {
+  "id": "T06",
+  "demo": false,
+  "order": 5,
+  "name": "Name not captured",
+  "phone": "+91 98•••• ••15",
+  "calledAt": "5 Sep · 3:28 pm",
+  "duration": "5 min 01 s",
+  "summary": "Startup fitting out a bare-shell 800 sq ft office for 20 people. Founder is the decision-maker.",
+  "source": "—",
+  "slot": "Wed 9 Sep · 5:00 pm",
+  "mode": "Site visit",
+  "verdict": "Qualified",
+  "reason": "All five criteria pass or are unclear only on budget/decision-maker",
+  "score": 100,
+  "flags": [],
+  "notes": [],
+  "question": null,
+  "criteria": {
+   "c1": {
+    "result": "pass",
+    "note": "Wants design + execution",
+    "confidence": 0.9
+   },
+   "c2": {
+    "result": "pass",
+    "note": "In service area (Baner)",
+    "confidence": 0.9
+   },
+   "c3": {
+    "result": "pass",
+    "note": "16.7 weeks available",
+    "confidence": 0.9
+   },
+   "c4": {
+    "result": "pass",
+    "note": "Budget not mentioned - treated as pass",
+    "confidence": 0.9
+   },
+   "c5": {
+    "result": "pass",
+    "note": "Decision-maker confirmed",
+    "confidence": 0.9
+   }
+  },
+  "property": "Baner · 800 sq ft · office",
+  "asked": [
+   "Locality",
+   "Size",
+   "Scope",
+   "Timeline",
+   "Decision-maker"
+  ],
+  "status": "New",
+  "priceAsked": false,
+  "followUpNote": null,
+  "escalation": null
+ },
+ {
+  "id": "T07",
+  "demo": false,
+  "order": 6,
+  "name": "Name not captured",
+  "phone": "+91 98•••• ••16",
+  "calledAt": "8 Sep · 9:44 am",
+  "duration": "3 min 15 s",
+  "summary": "Wanted living room and kitchen done before Diwali, about 3 weeks. A start after Diwali would work.",
+  "source": "—",
+  "slot": null,
+  "mode": null,
+  "verdict": "Not qualified",
+  "reason": "Timeline: Needs it in 3.0 weeks (< 6)",
+  "score": 72,
+  "flags": [
+   "follow_up"
+  ],
+  "notes": [
+   "Start after Diwali would work (November)"
+  ],
+  "question": null,
+  "criteria": {
+   "c1": {
+    "result": "pass",
+    "note": "Wants design + execution",
+    "confidence": 0.9
+   },
+   "c2": {
+    "result": "unclear",
+    "note": "Locality not captured or not recognised",
+    "confidence": 0.9
+   },
+   "c3": {
+    "result": "fail",
+    "note": "Needs it in 3.0 weeks (< 6)",
+    "confidence": 0.9
+   },
+   "c4": {
+    "result": "pass",
+    "note": "Budget not mentioned - treated as pass",
+    "confidence": 0.9
+   },
+   "c5": {
+    "result": "pass",
+    "note": "Decision-maker confirmed",
+    "confidence": 0.9
+   }
+  },
+  "property": "home",
+  "asked": [
+   "Scope",
+   "Timeline",
+   "Decision-maker"
+  ],
+  "status": "New",
+  "priceAsked": false,
+  "followUpNote": "Start after Diwali would work (November)",
+  "escalation": null
+ },
+ {
+  "id": "T08",
+  "demo": false,
+  "order": 7,
+  "name": "Unknown caller",
+  "phone": "+91 98•••• ••17",
+  "calledAt": "9 Sep · 10:47 pm",
+  "duration": "Missed",
+  "summary": "Missed call after hours from the Nanded City area. SMS sent; callback due 8:00 am.",
+  "source": "—",
+  "slot": null,
+  "mode": null,
+  "verdict": "Missed",
+  "reason": "Missed/dropped call - SMS + callback, no verdict yet",
+  "score": null,
+  "flags": [],
+  "notes": [],
+  "question": null,
+  "criteria": {
+   "c1": {
+    "result": "unclear",
+    "note": "n/a",
+    "confidence": 0.9
+   },
+   "c2": {
+    "result": "unclear",
+    "note": "n/a",
+    "confidence": 0.9
+   },
+   "c3": {
+    "result": "unclear",
+    "note": "n/a",
+    "confidence": 0.9
+   },
+   "c4": {
+    "result": "unclear",
+    "note": "n/a",
+    "confidence": 0.9
+   },
+   "c5": {
+    "result": "unclear",
+    "note": "n/a",
+    "confidence": 0.9
+   }
+  },
+  "property": "Details not captured",
+  "asked": [],
+  "status": "New",
+  "priceAsked": false,
+  "followUpNote": null,
+  "escalation": null
+ },
+ {
+  "id": "T09",
+  "demo": false,
+  "order": 8,
+  "name": "Sheetal Deshpande",
+  "phone": "+91 98•••• ••18",
+  "calledAt": "10 Sep · 11:32 am",
+  "duration": "5 min 52 s",
+  "summary": "Existing client, Viman Nagar 2BHK. Designer Aryan has not replied in five days. Wants a senior person to call back.",
+  "source": "—",
+  "slot": null,
+  "mode": null,
+  "verdict": "Escalate",
+  "reason": "Existing client complaint - not a lead",
+  "score": null,
+  "flags": [],
+  "notes": [],
+  "question": null,
+  "criteria": {
+   "c1": {
+    "result": "unclear",
+    "note": "n/a",
+    "confidence": 0.9
+   },
+   "c2": {
+    "result": "unclear",
+    "note": "n/a",
+    "confidence": 0.9
+   },
+   "c3": {
+    "result": "unclear",
+    "note": "n/a",
+    "confidence": 0.9
+   },
+   "c4": {
+    "result": "unclear",
+    "note": "n/a",
+    "confidence": 0.9
+   },
+   "c5": {
+    "result": "unclear",
+    "note": "n/a",
+    "confidence": 0.9
+   }
+  },
+  "property": "Details not captured",
+  "asked": [
+   "Name"
+  ],
+  "status": "New",
+  "priceAsked": false,
+  "followUpNote": null,
+  "escalation": {
+   "promiseMinutes": 15,
+   "startedAgoMinutes": 4
+  }
+ },
+ {
+  "id": "T10",
+  "demo": false,
+  "order": 9,
+  "name": "Name not captured",
+  "phone": "+91 98•••• ••19",
+  "calledAt": "11 Sep · 2:04 pm",
+  "duration": "3 min 40 s",
+  "summary": "Kitchen and one bedroom in Kharadi with a volunteered budget far below that scope. Declined kindly.",
+  "source": "—",
+  "slot": null,
+  "mode": null,
+  "verdict": "Not qualified",
+  "reason": "Budget: Volunteered budget is significantly below what a project of that scope would cost with us",
+  "score": 80,
+  "flags": [
+   "adjoining_area"
+  ],
+  "notes": [],
+  "question": null,
+  "criteria": {
+   "c1": {
+    "result": "pass",
+    "note": "Wants design + execution",
+    "confidence": 0.9
+   },
+   "c2": {
+    "result": "pass",
+    "note": "Kharadi is in Pune but not on the list (adjoining area)",
+    "confidence": 0.9
+   },
+   "c3": {
+    "result": "pass",
+    "note": "No completion date given (start date or 'design now')",
+    "confidence": 0.9
+   },
+   "c4": {
+    "result": "fail",
+    "note": "Volunteered budget is significantly below what a project of that scope would cost with us",
+    "confidence": 0.9
+   },
+   "c5": {
+    "result": "pass",
+    "note": "Decision-maker confirmed",
+    "confidence": 0.9
+   }
+  },
+  "property": "Kharadi · 550 sq ft · home",
+  "asked": [
+   "Locality",
+   "Size",
+   "Scope",
+   "Decision-maker"
+  ],
+  "status": "New",
+  "priceAsked": false,
+  "followUpNote": null,
+  "escalation": null
+ },
+ {
+  "id": "T11",
+  "demo": false,
+  "order": 10,
+  "name": "Name not captured",
+  "phone": "+91 98•••• ••20",
+  "calledAt": "12 Sep · 10:18 am",
+  "duration": "6 min 22 s",
+  "summary": "Rented 2BHK in Baner, landlord agrees, no structural change. Living room, bedroom, kitchen.",
+  "source": "—",
+  "slot": "Mon 14 Sep · 6:30 pm",
+  "mode": "Site visit",
+  "verdict": "Qualified",
+  "reason": "All five criteria pass or are unclear only on budget/decision-maker",
+  "score": 100,
+  "flags": [],
+  "notes": [],
+  "question": null,
+  "criteria": {
+   "c1": {
+    "result": "pass",
+    "note": "Wants design + execution",
+    "confidence": 0.9
+   },
+   "c2": {
+    "result": "pass",
+    "note": "In service area (Baner)",
+    "confidence": 0.9
+   },
+   "c3": {
+    "result": "pass",
+    "note": "No completion date given (start date or 'design now')",
+    "confidence": 0.9
+   },
+   "c4": {
+    "result": "pass",
+    "note": "Budget not mentioned - treated as pass",
+    "confidence": 0.9
+   },
+   "c5": {
+    "result": "pass",
+    "note": "Rented, landlord OK, no structural change",
+    "confidence": 0.9
+   }
+  },
+  "property": "Baner · home",
+  "asked": [
+   "Locality",
+   "Scope",
+   "Decision-maker"
+  ],
+  "status": "New",
+  "priceAsked": false,
+  "followUpNote": null,
+  "escalation": null
+ },
+ {
+  "id": "T12",
+  "demo": false,
+  "order": 11,
+  "name": "Anand Sharma",
+  "phone": "+91 98•••• ••21",
+  "calledAt": "15 Sep · 10:05 am",
+  "duration": "7 min 30 s",
+  "summary": "5,500 sq ft villa, new possession, empty. Wants the principal designer on site this week or next.",
+  "source": "—",
+  "slot": "Thu 17 Sep · 11:00 am",
+  "mode": "Site visit",
+  "verdict": "Qualified",
+  "reason": "All five criteria pass or are unclear only on budget/decision-maker",
+  "score": 100,
+  "flags": [
+   "high_value"
+  ],
+  "notes": [],
+  "question": null,
+  "criteria": {
+   "c1": {
+    "result": "pass",
+    "note": "Wants design + execution",
+    "confidence": 0.9
+   },
+   "c2": {
+    "result": "pass",
+    "note": "In service area (Kalyani Nagar)",
+    "confidence": 0.9
+   },
+   "c3": {
+    "result": "pass",
+    "note": "28.1 weeks available",
+    "confidence": 0.9
+   },
+   "c4": {
+    "result": "pass",
+    "note": "Budget not mentioned - treated as pass",
+    "confidence": 0.9
+   },
+   "c5": {
+    "result": "pass",
+    "note": "Decision-maker confirmed",
+    "confidence": 0.9
+   }
+  },
+  "property": "Kalyani Nagar · 5,500 sq ft · home",
+  "asked": [
+   "Name",
+   "Locality",
+   "Size",
+   "Scope",
+   "Timeline",
+   "Decision-maker"
+  ],
+  "status": "New",
+  "priceAsked": false,
+  "followUpNote": null,
+  "escalation": null
+ },
+ {
+  "id": "T13",
+  "demo": false,
+  "order": 12,
+  "name": "Name not captured",
+  "phone": "+91 98•••• ••22",
+  "calledAt": "16 Sep · 12:19 pm",
+  "duration": "6 min 08 s",
+  "summary": "3BHK in Aundh: kitchen, wardrobes, living room. Asked for a range, accepted the standard answer and booked.",
+  "source": "—",
+  "slot": "Sat 19 Sep · 12:00 pm",
+  "mode": "Site visit",
+  "verdict": "Qualified",
+  "reason": "All five criteria pass or are unclear only on budget/decision-maker",
+  "score": 100,
+  "flags": [
+   "price_asked"
+  ],
+  "notes": [],
+  "question": null,
+  "criteria": {
+   "c1": {
+    "result": "pass",
+    "note": "Wants design + execution",
+    "confidence": 0.9
+   },
+   "c2": {
+    "result": "pass",
+    "note": "In service area (Aundh)",
+    "confidence": 0.9
+   },
+   "c3": {
+    "result": "pass",
+    "note": "No completion date given (start date or 'design now')",
+    "confidence": 0.9
+   },
+   "c4": {
+    "result": "pass",
+    "note": "Budget not mentioned - treated as pass",
+    "confidence": 0.9
+   },
+   "c5": {
+    "result": "pass",
+    "note": "Decision-maker confirmed",
+    "confidence": 0.9
+   }
+  },
+  "property": "Aundh · 1,100 sq ft · home",
+  "asked": [
+   "Locality",
+   "Size",
+   "Scope",
+   "Decision-maker"
+  ],
+  "status": "New",
+  "priceAsked": true,
+  "followUpNote": null,
+  "escalation": null
+ },
+ {
+  "id": "T14",
+  "demo": false,
+  "order": 13,
+  "name": "Name not captured (son)",
+  "phone": "+91 98•••• ••23",
+  "calledAt": "17 Sep · 11:41 am",
+  "duration": "4 min 55 s",
+  "summary": "Son calling about his parents' new 3BHK in Hadapsar. Parents decide and will attend the consultation.",
+  "source": "—",
+  "slot": "Sun 20 Sep · 11:00 am",
+  "mode": "Site visit",
+  "verdict": "Qualified",
+  "reason": "All five criteria pass or are unclear only on budget/decision-maker",
+  "score": 92,
+  "flags": [],
+  "notes": [
+   "Son is calling; parents decide and will attend the consultation"
+  ],
+  "question": null,
+  "criteria": {
+   "c1": {
+    "result": "pass",
+    "note": "Wants design + execution",
+    "confidence": 0.9
+   },
+   "c2": {
+    "result": "pass",
+    "note": "In service area (Hadapsar)",
+    "confidence": 0.9
+   },
+   "c3": {
+    "result": "pass",
+    "note": "No completion date given (start date or 'design now')",
+    "confidence": 0.9
+   },
+   "c4": {
+    "result": "pass",
+    "note": "Budget not mentioned - treated as pass",
+    "confidence": 0.9
+   },
+   "c5": {
+    "result": "unclear",
+    "note": "Son is calling; parents decide and will attend the consultation",
+    "confidence": 0.9
+   }
+  },
+  "property": "Hadapsar · home",
+  "asked": [
+   "Locality",
+   "Scope",
+   "Decision-maker"
+  ],
+  "status": "New",
+  "priceAsked": false,
+  "followUpNote": null,
+  "escalation": null
+ },
+ {
+  "id": "T15",
+  "demo": false,
+  "order": 14,
+  "name": "Smita",
+  "phone": "+91 98•••• ••24",
+  "calledAt": "18 Sep · 3:12 pm",
+  "duration": "5 min 44 s",
+  "summary": "Possession in about six weeks. Wants design to start now; the builder will let them in to see the flat.",
+  "source": "—",
+  "slot": "Mon 21 Sep · 5:00 pm",
+  "mode": "Site visit",
+  "verdict": "Qualified",
+  "reason": "All five criteria pass or are unclear only on budget/decision-maker",
+  "score": 100,
+  "flags": [],
+  "notes": [],
+  "question": null,
+  "criteria": {
+   "c1": {
+    "result": "pass",
+    "note": "Wants design + execution",
+    "confidence": 0.9
+   },
+   "c2": {
+    "result": "pass",
+    "note": "In service area (Undri)",
+    "confidence": 0.9
+   },
+   "c3": {
+    "result": "pass",
+    "note": "No completion date given (start date or 'design now')",
+    "confidence": 0.9
+   },
+   "c4": {
+    "result": "pass",
+    "note": "Budget not mentioned - treated as pass",
+    "confidence": 0.9
+   },
+   "c5": {
+    "result": "pass",
+    "note": "Owner; husband said go ahead",
+    "confidence": 0.9
+   }
+  },
+  "property": "Undri · 875 sq ft · home",
+  "asked": [
+   "Name",
+   "Locality",
+   "Size",
+   "Scope",
+   "Decision-maker"
+  ],
+  "status": "New",
+  "priceAsked": false,
+  "followUpNote": null,
+  "escalation": null
+ },
+ {
+  "id": "T16",
+  "demo": false,
+  "order": 15,
+  "name": "Girish Nair",
+  "phone": "+91 98•••• ••25",
+  "calledAt": "19 Sep · 10:38 am",
+  "duration": "5 min 18 s",
+  "summary": "Called Monday, nobody followed up. Frustrated. Handle with care and book directly.",
+  "source": "—",
+  "slot": "Sun 20 Sep · 10:00 am",
+  "mode": "Site visit",
+  "verdict": "Qualified",
+  "reason": "All five criteria pass or are unclear only on budget/decision-maker",
+  "score": 100,
+  "flags": [
+   "service_recovery"
+  ],
+  "notes": [],
+  "question": null,
+  "criteria": {
+   "c1": {
+    "result": "pass",
+    "note": "Wants design + execution",
+    "confidence": 0.9
+   },
+   "c2": {
+    "result": "pass",
+    "note": "In service area (Viman Nagar)",
+    "confidence": 0.9
+   },
+   "c3": {
+    "result": "pass",
+    "note": "No completion date given (start date or 'design now')",
+    "confidence": 0.9
+   },
+   "c4": {
+    "result": "pass",
+    "note": "Budget not mentioned - treated as pass",
+    "confidence": 0.9
+   },
+   "c5": {
+    "result": "pass",
+    "note": "Decision-maker confirmed",
+    "confidence": 0.9
+   }
+  },
+  "property": "Viman Nagar · home",
+  "asked": [
+   "Name",
+   "Locality",
+   "Scope",
+   "Decision-maker"
+  ],
+  "status": "New",
+  "priceAsked": false,
+  "followUpNote": null,
+  "escalation": null
+ },
+ {
+  "id": "T17",
+  "demo": false,
+  "order": 16,
+  "name": "Ritu Kapoor",
+  "phone": "+91 98•••• ••26",
+  "calledAt": "22 Sep · 2:14 pm",
+  "duration": "1 min 12 s + 4 min 30 s",
+  "summary": "Line dropped, she called back two minutes later. Merged into one lead. Full-home 3BHK.",
+  "source": "—",
+  "slot": "Thu 24 Sep · 6:00 pm",
+  "mode": "Site visit",
+  "verdict": "Qualified",
+  "reason": "All five criteria pass or are unclear only on budget/decision-maker",
+  "score": 100,
+  "flags": [],
+  "notes": [],
+  "question": null,
+  "criteria": {
+   "c1": {
+    "result": "pass",
+    "note": "Wants design + execution",
+    "confidence": 0.9
+   },
+   "c2": {
+    "result": "pass",
+    "note": "In service area (Pimple Saudagar)",
+    "confidence": 0.9
+   },
+   "c3": {
+    "result": "pass",
+    "note": "27.1 weeks available",
+    "confidence": 0.9
+   },
+   "c4": {
+    "result": "pass",
+    "note": "Budget not mentioned - treated as pass",
+    "confidence": 0.9
+   },
+   "c5": {
+    "result": "pass",
+    "note": "Decision-maker confirmed",
+    "confidence": 0.9
+   }
+  },
+  "property": "Pimple Saudagar · 1,050 sq ft · home",
+  "asked": [
+   "Name",
+   "Locality",
+   "Size",
+   "Scope",
+   "Timeline",
+   "Decision-maker"
+  ],
+  "status": "New",
+  "priceAsked": false,
+  "followUpNote": null,
+  "escalation": null
+ },
+ {
+  "id": "T18",
+  "demo": false,
+  "order": 17,
+  "name": "Name not captured",
+  "phone": "+91 98•••• ••27",
+  "calledAt": "23 Sep · 11:55 am",
+  "duration": "3 min 02 s",
+  "summary": "180 sq ft coworking pod, below the commercial minimum. Declined politely.",
+  "source": "—",
+  "slot": null,
+  "mode": null,
+  "verdict": "Not qualified",
+  "reason": "Service area: Commercial 180 sq ft is below the 500 sq ft minimum",
+  "score": 80,
+  "flags": [],
+  "notes": [],
+  "question": null,
+  "criteria": {
+   "c1": {
+    "result": "pass",
+    "note": "Wants design + execution",
+    "confidence": 0.9
+   },
+   "c2": {
+    "result": "fail",
+    "note": "Commercial 180 sq ft is below the 500 sq ft minimum",
+    "confidence": 0.9
+   },
+   "c3": {
+    "result": "pass",
+    "note": "No completion date given (start date or 'design now')",
+    "confidence": 0.9
+   },
+   "c4": {
+    "result": "pass",
+    "note": "Budget not mentioned - treated as pass",
+    "confidence": 0.9
+   },
+   "c5": {
+    "result": "pass",
+    "note": "Decision-maker confirmed",
+    "confidence": 0.9
+   }
+  },
+  "property": "180 sq ft · office",
+  "asked": [
+   "Size",
+   "Scope",
+   "Decision-maker"
+  ],
+  "status": "New",
+  "priceAsked": false,
+  "followUpNote": null,
+  "escalation": null
+ },
+ {
+  "id": "T19",
+  "demo": false,
+  "order": 18,
+  "name": "Name not captured",
+  "phone": "+91 98•••• ••28",
+  "calledAt": "24 Sep · 4:02 pm",
+  "duration": "2 min 50 s",
+  "summary": "Restaurant interiors in Koregaon Park. Out of scope, declined politely.",
+  "source": "—",
+  "slot": null,
+  "mode": null,
+  "verdict": "Not qualified",
+  "reason": "Service area: restaurant projects are out of scope",
+  "score": 80,
+  "flags": [],
+  "notes": [],
+  "question": null,
+  "criteria": {
+   "c1": {
+    "result": "pass",
+    "note": "Wants design + execution",
+    "confidence": 0.9
+   },
+   "c2": {
+    "result": "fail",
+    "note": "restaurant projects are out of scope",
+    "confidence": 0.95
+   },
+   "c3": {
+    "result": "pass",
+    "note": "No completion date given (start date or 'design now')",
+    "confidence": 0.9
+   },
+   "c4": {
+    "result": "pass",
+    "note": "Budget not mentioned - treated as pass",
+    "confidence": 0.9
+   },
+   "c5": {
+    "result": "pass",
+    "note": "Decision-maker confirmed",
+    "confidence": 0.9
+   }
+  },
+  "property": "Koregaon Park · restaurant",
+  "asked": [
+   "Locality",
+   "Decision-maker"
+  ],
+  "status": "New",
+  "priceAsked": false,
+  "followUpNote": null,
+  "escalation": null
+ },
+ {
+  "id": "T20",
+  "demo": false,
+  "order": 19,
+  "name": "Pooja",
+  "phone": "+91 98•••• ••29",
+  "calledAt": "25 Sep · 9:15 am",
+  "duration": "4 min 44 s",
+  "summary": "2BHK in Magarpatta, January start. Both owners want to attend.",
+  "source": "—",
+  "slot": "Tue 29 Sep · 7:00 pm",
+  "mode": "Site visit",
+  "verdict": "Qualified",
+  "reason": "All five criteria pass or are unclear only on budget/decision-maker",
+  "score": 100,
+  "flags": [],
+  "notes": [],
+  "question": null,
+  "criteria": {
+   "c1": {
+    "result": "pass",
+    "note": "Wants design + execution",
+    "confidence": 0.9
+   },
+   "c2": {
+    "result": "pass",
+    "note": "In service area (Magarpatta)",
+    "confidence": 0.9
+   },
+   "c3": {
+    "result": "pass",
+    "note": "No completion date given (start date or 'design now')",
+    "confidence": 0.9
+   },
+   "c4": {
+    "result": "pass",
+    "note": "Budget not mentioned - treated as pass",
+    "confidence": 0.9
+   },
+   "c5": {
+    "result": "pass",
+    "note": "Decision-maker confirmed",
+    "confidence": 0.9
+   }
+  },
+  "property": "Magarpatta · 900 sq ft · home",
+  "asked": [
+   "Name",
+   "Locality",
+   "Size",
+   "Scope",
+   "Timeline",
+   "Decision-maker"
+  ],
+  "status": "New",
+  "priceAsked": false,
+  "followUpNote": null,
+  "escalation": null
+ },
+ {
+  "id": "DEMO-1",
+  "demo": true,
+  "order": 20,
+  "name": "Demo caller A",
+  "phone": "+91 98•••• ••30",
+  "calledAt": "26 Sep · 1:10 pm",
+  "duration": "4 min 05 s",
+  "summary": "DEMO: needs two rooms done in about 6.5 weeks. The designer should judge whether that is feasible.",
+  "source": "—",
+  "slot": null,
+  "mode": null,
+  "verdict": "Needs human",
+  "reason": "Timeline unclear: 6.4 weeks - designer to judge feasibility",
+  "score": 92,
+  "flags": [],
+  "notes": [],
+  "question": "When would you need the project complete?",
+  "criteria": {
+   "c1": {
+    "result": "pass",
+    "note": "Wants design + execution",
+    "confidence": 0.9
+   },
+   "c2": {
+    "result": "pass",
+    "note": "In service area (Baner)",
+    "confidence": 0.9
+   },
+   "c3": {
+    "result": "unclear",
+    "note": "6.4 weeks - designer to judge feasibility",
+    "confidence": 0.9
+   },
+   "c4": {
+    "result": "pass",
+    "note": "Budget not mentioned - treated as pass",
+    "confidence": 0.9
+   },
+   "c5": {
+    "result": "pass",
+    "note": "Decision-maker confirmed",
+    "confidence": 0.9
+   }
+  },
+  "property": "Baner · home",
+  "asked": [
+   "Locality",
+   "Scope",
+   "Timeline",
+   "Decision-maker"
+  ],
+  "status": "New",
+  "priceAsked": false,
+  "followUpNote": null,
+  "escalation": null
+ },
+ {
+  "id": "DEMO-2",
+  "demo": true,
+  "order": 21,
+  "name": "Demo caller B",
+  "phone": "+91 98•••• ••31",
+  "calledAt": "26 Sep · 8:40 pm",
+  "duration": "0 min 48 s",
+  "summary": "DEMO: caller hung up before locality and scope were captured. Callback needed.",
+  "source": "—",
+  "slot": null,
+  "mode": null,
+  "verdict": "Needs human",
+  "reason": "Caller hung up before key facts were captured",
+  "score": 84,
+  "flags": [],
+  "notes": [
+   "Decision-maker unclear - designer to confirm"
+  ],
+  "question": null,
+  "criteria": {
+   "c1": {
+    "result": "pass",
+    "note": "Wants design + execution",
+    "confidence": 0.9
+   },
+   "c2": {
+    "result": "unclear",
+    "note": "Locality not captured or not recognised",
+    "confidence": 0.9
+   },
+   "c3": {
+    "result": "pass",
+    "note": "No completion date given (start date or 'design now')",
+    "confidence": 0.9
+   },
+   "c4": {
+    "result": "pass",
+    "note": "Budget not mentioned - treated as pass",
+    "confidence": 0.9
+   },
+   "c5": {
+    "result": "unclear",
+    "note": "Decision-maker not clear",
+    "confidence": 0.9
+   }
+  },
+  "property": "home",
+  "asked": [],
+  "status": "New",
+  "priceAsked": false,
+  "followUpNote": null,
+  "escalation": null
+ }
+]

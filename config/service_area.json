@@ -1,0 +1,7 @@
+{
+  "pune_city": ["kothrud", "baner", "aundh", "wakad", "koregaon park", "kalyani nagar", "viman nagar", "hadapsar", "magarpatta", "nibm", "kondhwa", "undri", "shivane", "warje", "erandwane", "deccan"],
+  "pcmc": ["pimpri", "chinchwad", "pimple saudagar", "pimple nilakh", "ravet", "hinjewadi"],
+  "adjoining_unlisted_but_in_pune": ["kharadi", "nanded city", "sunderban"],
+  "outside": ["talegaon", "lonavala", "nashik", "mumbai"],
+  "note": "adjoining_unlisted_but_in_pune is inferred from the transcripts (T10, T08) - Nikhil/owner to confirm."
+}

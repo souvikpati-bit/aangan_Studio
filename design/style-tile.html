@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aangan Style Tile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F6F2EC; --surface:#FBF9F5; --ink:#2A2622; --ink-2:#6B635A; --line:#E3DCD1;
+  --accent:#2F4A3C; --accent-ink:#F6F2EC;
+  --ok:#4F7A5E; --ok-bg:#E6EEE7;
+  --human:#9A6B1F; --human-bg:#F3E8D2;
+  --declined:#6B635A; --declined-bg:#ECE7DF;
+  --esc:#A4492F; --esc-bg:#F4E1DA;
+  --r-s:12px; --r-m:16px; --r-l:20px;
+  --shadow:0 1px 2px rgba(42,38,34,.04),0 8px 24px rgba(42,38,34,.06);
+  --e-in:cubic-bezier(.215,.61,.355,1);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#1B1815; --surface:#23201C; --ink:#F1ECE4; --ink-2:#A79F94; --line:#38332D;
+    --accent:#8DB5A0; --accent-ink:#1B1815;
+    --ok:#8DB5A0; --ok-bg:#26332B; --human:#D9AE63; --human-bg:#3A2F1B;
+    --declined:#A79F94; --declined-bg:#2E2A25; --esc:#E08B72; --esc-bg:#3F2620;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#1B1815; --surface:#23201C; --ink:#F1ECE4; --ink-2:#A79F94; --line:#38332D;
+  --accent:#8DB5A0; --accent-ink:#1B1815;
+  --ok:#8DB5A0; --ok-bg:#26332B; --human:#D9AE63; --human-bg:#3A2F1B;
+  --declined:#A79F94; --declined-bg:#2E2A25; --esc:#E08B72; --esc-bg:#3F2620;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--ink);font:400 15px/1.6 Inter,system-ui,sans-serif;padding:48px 16px}
+main{max-width:960px;margin:0 auto;display:grid;gap:48px}
+h1,h2,.serif{font-family:Fraunces,Georgia,serif;font-weight:400;letter-spacing:-.01em}
+h1{font-size:clamp(34px,6vw,52px);line-height:1.1}
+h2{font-size:22px;margin-bottom:16px}
+.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);margin-bottom:12px}
+.sub{color:var(--ink-2);max-width:56ch;margin-top:12px}
+.row{display:flex;flex-wrap:wrap;gap:16px}
+.sw{width:128px}
+.sw i{display:block;height:72px;border-radius:var(--r-s);border:1px solid var(--line)}
+.sw b{display:block;font-weight:500;margin-top:8px;font-size:13px}
+.sw span{font-size:12px;color:var(--ink-2)}
+.type .big{font-family:Fraunces,serif;font-size:44px;line-height:1.1}
+.type .num{font-family:Fraunces,serif;font-size:56px;font-variant-numeric:tabular-nums}
+.btn{font:500 14px Inter;min-height:44px;padding:0 22px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;transition:transform .3s var(--e-in),box-shadow .3s var(--e-in)}
+.btn:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.btn:active{transform:translateY(0) scale(.98)}
+.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-l);box-shadow:var(--shadow);padding:24px;transition:transform .35s var(--e-in),box-shadow .35s var(--e-in)}
+.card:hover{transform:translateY(-3px)}
+.lead{display:grid;gap:16px;max-width:560px}
+.lead header{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}
+.lead h3{font:400 24px Fraunces,serif}
+.meta{color:var(--ink-2);font-size:14px}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;white-space:nowrap}
+.pill::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.ok{background:var(--ok-bg);color:var(--ok)} .human{background:var(--human-bg);color:var(--human)}
+.declined{background:var(--declined-bg);color:var(--declined)} .esc{background:var(--esc-bg);color:var(--esc)}
+.slot{border-top:1px solid var(--line);padding-top:16px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:14px}
+.tags{display:flex;gap:8px;flex-wrap:wrap}
+.tag{font-size:12px;border:1px solid var(--line);border-radius:999px;padding:2px 10px;color:var(--ink-2)}
+.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.metric .num{font:400 44px Fraunces,serif;font-variant-numeric:tabular-nums}
+.metric small{color:var(--ink-2)}
+ul.motion{padding-left:20px;display:grid;gap:6px;color:var(--ink-2)}
+.toggle{position:fixed;top:12px;right:12px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<button class="btn toggle" onclick="var r=document.documentElement;r.dataset.theme=(r.dataset.theme==='dark'?'light':'dark')" aria-label="Toggle light and dark theme">Light / Dark</button>
+<main>
+  <header>
+    <p class="eyebrow">Aangan Studio · Voice leads · Style tile v1</p>
+    <h1>Calm, warm, editorial.</h1>
+    <p class="sub">The dashboard should feel like the studio's own website: lots of air, one green accent, and motion that is smooth and never showy.</p>
+  </header>
+
+  <section aria-labelledby="c"><h2 id="c">Colour</h2>
+    <div class="row">
+      <div class="sw"><i style="background:var(--bg)"></i><b>Paper</b><span>#F6F2EC</span></div>
+      <div class="sw"><i style="background:var(--surface)"></i><b>Surface</b><span>#FBF9F5</span></div>
+      <div class="sw"><i style="background:var(--ink)"></i><b>Charcoal</b><span>#2A2622</span></div>
+      <div class="sw"><i style="background:var(--accent)"></i><b>Forest (accent)</b><span>#2F4A3C</span></div>
+      <div class="sw"><i style="background:var(--ok-bg)"></i><b>Qualified</b><span>sage</span></div>
+      <div class="sw"><i style="background:var(--human-bg)"></i><b>Needs human</b><span>ochre</span></div>
+      <div class="sw"><i style="background:var(--declined-bg)"></i><b>Declined</b><span>stone</span></div>
+      <div class="sw"><i style="background:var(--esc-bg)"></i><b>Escalation</b><span>clay</span></div>
+    </div>
+  </section>
+
+  <section class="type" aria-labelledby="t"><h2 id="t">Type</h2>
+    <p class="big">Fraunces for headings</p>
+    <p class="num">₹ 12.4 L</p>
+    <p class="meta">Inter for interface text and data, with tabular figures so numbers line up. 8px spacing grid, 12–20px corners, hairline borders.</p>
+  </section>
+
+  <section aria-labelledby="b"><h2 id="b">Buttons</h2>
+    <div class="row"><button class="btn primary">Confirm slot</button><button class="btn">Mark contacted</button><button class="btn">Override verdict</button></div>
+  </section>
+
+  <section aria-labelledby="l"><h2 id="l">Lead card</h2>
+    <article class="card lead">
+      <header>
+        <div><h3>Priya Kulkarni</h3><p class="meta">Kothrud · 3BHK · 1,400 sq ft · Full home</p></div>
+        <span class="pill ok">Qualified</span>
+      </header>
+      <div class="tags"><span class="tag">Referral · Shruti Joshi</span><span class="tag">By March</span><span class="tag">Decision-maker: yes</span></div>
+      <p class="meta">All five checks passed. Owner, husband has agreed. Wants the whole flat redone.</p>
+      <div class="slot"><span><b>Tue 15 Sep, 6:00 PM</b> · Site visit</span><a href="#" style="color:var(--accent)">Open details</a></div>
+    </article>
+  </section>
+
+  <section aria-labelledby="m"><h2 id="m">Founder metric tiles</h2>
+    <div class="metrics">
+      <div class="card metric"><small>Answered within 5 min</small><div class="num">96%</div><small>baseline: 48% unanswered at 48 h</small></div>
+      <div class="card metric"><small>Revenue won (month)</small><div class="num">₹ 24 L</div><small>sample figure</small></div>
+      <div class="card metric"><small>Cost per won project</small><div class="num">₹ 310</div><small>sample figure</small></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="mo"><h2 id="mo">Motion (GSAP, one shared set of easings)</h2>
+    <ul class="motion">
+      <li>Page load: headings then cards rise 16–24px and fade in, 0.06s apart.</li>
+      <li>Lead cards: gentle 2–4px lift on hover, smooth height expand, new leads slide in with a highlight that fades.</li>
+      <li>Tabs and filters: cards glide to their new place (Flip) instead of blinking.</li>
+      <li>Founder page only: numbers count up, charts draw in, sections reveal on scroll.</li>
+      <li>Escalations: a calm countdown ring that warms as time runs out, never flashing.</li>
+      <li>Needs-human and Escalation screens appear instantly. No decorative motion there.</li>
+      <li>Reduced motion is honoured automatically, plus a toggle in Settings.</li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>

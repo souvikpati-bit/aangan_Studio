@@ -1,0 +1,16 @@
+{
+  "name": "aangan-studio-voice-leads",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/golden.test.ts tests/extract.test.ts tests/agent_booking.test.ts",
+    "extract:live": "node --env-file=.env scripts/run_extraction.ts",
+    "vaani:create": "node --env-file=.env scripts/vaani_create_agent.ts",
+    "vaani:prompt": "node scripts/make_vaani_prompt.ts",
+    "db:migrate": "node --no-warnings --env-file=.env scripts/db_migrate.ts",
+    "db:seed": "node --no-warnings --env-file=.env scripts/db_seed.ts"
+  },
+  "dependencies": {
+    "pg": "^8.23.1"
+  }
+}
