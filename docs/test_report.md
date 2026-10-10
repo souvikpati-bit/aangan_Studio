@@ -1,20 +1,23 @@
-# Test report - Phase 1 (rules engine)
+# Test report
 
-Run: `npm test` (Node 24, no dependencies). Result: **30 / 30 passing**.
+Run `npm test` (Node 24, no keys needed). Result: **63 / 63 passing**.
 
-## What was tested
-- All 20 phone transcripts (T01-T20) through `qualify()` using each call's own date as `as_of`. Result matches the golden set: 12 Qualified, 6 Not qualified, 1 Escalate, 1 Missed.
-- Expected flags: price_asked (T02, T13), tight_timeline (T02), VIP (T05), high_value (T12), service_recovery (T16), follow_up (T07).
-- Timeline edge cases at exactly 5, 6, 8 and 12 weeks: fail, Needs human, Qualified + tight flag, Qualified.
-- A low-confidence fail goes to Needs human, never declined.
-- A volunteered budget with unclear scope is not decided.
-- Asking for price never disqualifies.
-- T17 dropped call + callback merge into one lead. Withheld numbers never merge.
+## What the offline tests cover
+- **Golden set:** all 20 real September phone transcripts (T01-T20), each run with its own call date, give the expected verdict and flags: 12 Qualified, 6 Not qualified, 1 Escalate, 1 Missed.
+- **Timeline edges** at exactly 5, 6, 8 and 12 weeks: fail, Needs human, Qualified with a tight-timeline flag, Qualified.
+- **Doubtful cases go to a person:** a low-confidence fail is never declined; an unrecognised neighbourhood with the city "Pune" qualifies with a flag and a note to confirm; a city outside the service area is declined.
+- **Price safety:** the agent prompt and every approved line are scanned for lakh/crore, rupee signs, per-sq-ft and multiplier hints and for figures from the internal pricing guide; nine kinds of leak are caught and normal booking sentences pass.
+- **Booking:** never in the past, never inside the minimum notice, respects bookable hours, blocked days and travel buffers, returns the three closest slots.
+- **Calls:** a dropped call merges with the follow-up call; withheld numbers never merge; Vaani helpers (start a session, read call details, call start and length from the id and transcript timestamps).
+- **HubSpot** (mocked): contact + deal + note, existing contact reused by phone, stage moves on Won/Lost, errors surfaced.
+- **AI extraction** (mocked): Claude and Gemini adapters, strict validation of the AI's reply.
 
-## Important limits of this result
-- The fixtures are **hand-labelled facts** (what a correct extraction should return). This proves the rules, not the AI extraction. Extraction accuracy is tested in Phase 2 once an LLM key is in.
-- T09 and T08 are tested by call type only, since they have no real conversation.
+## Live checks (need keys)
+- `npm run extract:live`: the real AI reads all 20 transcripts and the rules engine decides. **20 / 20** match (`docs/extraction_report.md`).
+- `npm run test:webhook`: end-to-end against a running server, 11 checks: wrong secret refused, other events ignored, calls processed, duplicates ignored, lead row has name/source/transcript/recording, escalation created, email sent, HubSpot records created, test data cleaned up.
+- Real Vaani calls imported on the live site produced the correct lead, transcript, recording link, email and HubSpot records.
 
-## Notes for the owner
-- **T07 data quirk:** the transcript says Diwali is about 3 weeks away on 8 Sep, but Diwali 2026 is on 8 Nov (about 9 weeks). The fixture follows the call (3 weeks). With the real date T07 would pass the timeline check.
-- Assumptions in `config/settings.json` (commercial minimum 500 sq ft, budget floors, adjoining areas Kharadi / Nanded City / Sunderban) still need confirmation.
+## Honest notes
+- The 20 golden transcripts are human front-desk calls, so they test understanding and rules, not voice behaviour. Voice behaviour was checked with real test calls in Vaani.
+- Transcript T07 says Diwali is "about 3 weeks away" on 8 September, while real Diwali 2026 is 8 November. The test follows what the call says.
+- Not tested by automation: the browser microphone path, real phone calls, and Cal.com booking inside Vaani.

@@ -7,3 +7,9 @@ node_modules
 
 .vercel
 .env*
+
+# local reference material and build files, not part of the project
+docs/vaani/
+docs/vaani_openapi.yaml
+docs/vaani_support_message.md
+*.tsbuildinfo
