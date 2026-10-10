@@ -3,3 +3,7 @@
 node_modules
 .next
 .env.old*
+.vercel
+
+.vercel
+.env*
