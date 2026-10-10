@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { db } from "../../../../lib/db";
+import { updateDeal } from "../../../../lib/hubspot";
 
 const STATUSES = ["New", "Contacted", "Meeting held", "Won", "Lost"];
 const OVERRIDE_VERDICTS = ["Qualified", "Needs human", "Not qualified"];
@@ -17,6 +18,16 @@ export async function PATCH(req: Request, ctx: { params: Promise<{ ref: string }
     if (!STATUSES.includes(body.status)) return NextResponse.json({ error: "Bad status" }, { status: 400 });
     await pool.query("update leads set status = $1::lead_status where id = $2", [body.status, id]);
     await pool.query("insert into audit_log (action, target, reason) values ('status_change', $1, $2)", [ref, body.status]);
+    // Keep the HubSpot deal in step (Meeting held / Won / Lost). A HubSpot problem must not block the status change.
+    const token = process.env.HUBSPOT_TOKEN;
+    if (token) {
+      const deal = await pool.query("select hubspot_id from hubspot_sync_log where lead_id = $1 and entity = 'deal' and status = 'ok' order by created_at desc limit 1", [id]);
+      const lead = await pool.query("select deal_value_inr, exists(select 1 from meetings m where m.lead_id = l.id) as has_meeting from leads l where l.id = $1", [id]);
+      if (deal.rows[0]) {
+        try { await updateDeal(token, deal.rows[0].hubspot_id, body.status, !!lead.rows[0]?.has_meeting, lead.rows[0]?.deal_value_inr ? Number(lead.rows[0].deal_value_inr) : null); }
+        catch (e) { await pool.query("insert into hubspot_sync_log (lead_id, entity, status, error) values ($1,'deal','failed',$2)", [id, (e as Error).message]); }
+      }
+    }
   }
   if (typeof body.verdict === "string") {
     const reason = String(body.overrideReason ?? "").trim();

@@ -5,6 +5,7 @@ import type { Facts, ServiceArea, Settings } from "../../engine/types.ts";
 import settingsJson from "../../config/settings.json";
 import areaJson from "../../config/service_area.json";
 import { briefHtml, briefSubject, briefText, sendEmail } from "./email";
+import { syncLead } from "./hubspot";
 
 const settings = settingsJson as unknown as Settings;
 const area = areaJson as unknown as ServiceArea;
@@ -120,6 +121,20 @@ export async function processCall(p: VaaniPost): Promise<Outcome> {
   );
   if (extractionError)
     await pool.query("insert into notifications_log (kind, call_id, dedupe_key, status, body) values ('failure',$1,$2,'logged',$3) on conflict (dedupe_key) do nothing", [callId, `fail-${vaaniCallId}`, `Extraction failed: ${extractionError}`]);
+
+  // 6. HUBSPOT (skipped quietly when no token). A failure is logged and alerted, never allowed to lose the lead.
+  if (process.env.HUBSPOT_TOKEN && q.verdict !== "Closed") {
+    try {
+      const hs = await syncLead(process.env.HUBSPOT_TOKEN, {
+        ref, name, phone, locality: facts?.locality ?? null, property, verdict: q.verdict, reason: q.reason, summary, flags: q.flags, hasMeeting: false,
+      });
+      await pool.query("insert into hubspot_sync_log (lead_id, entity, hubspot_id, status) values ($1,'contact',$2,'ok')", [leadId, hs.contactId]);
+      if (hs.dealId) await pool.query("insert into hubspot_sync_log (lead_id, entity, hubspot_id, status) values ($1,'deal',$2,'ok')", [leadId, hs.dealId]);
+    } catch (e) {
+      await pool.query("insert into hubspot_sync_log (lead_id, entity, status, error) values ($1,'contact','failed',$2)", [leadId, (e as Error).message]);
+      await pool.query("insert into notifications_log (kind, call_id, dedupe_key, status, body) values ('failure',$1,$2,'logged',$3) on conflict (dedupe_key) do nothing", [callId, `hs-${vaaniCallId}`, `HubSpot sync failed: ${(e as Error).message}`]);
+    }
+  }
 
   return { duplicate: false, callId: vaaniCallId, verdict: q.verdict, leadRef: ref, emailed: sent.sent, extractionFailed: !!extractionError };
 }
