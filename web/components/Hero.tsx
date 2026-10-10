@@ -1,8 +1,6 @@
 "use client";
-import Link from "next/link";
 import Cinema from "./Cinema";
 import Reveal from "./Reveal";
-import Magnetic from "./Magnetic";
 import CountUp from "./CountUp";
 
 const PHOTOS = ["/media/hero-entry.jpg", "/media/living-oak.jpg", "/media/living-dusk.jpg", "/media/living-classic.jpg"];
@@ -19,7 +17,6 @@ export default function Hero({ qualified, needsHuman, escalations, total }: { qu
           <span className="chip"><b><CountUp to={qualified} /></b> qualified</span>
           <span className="chip"><b><CountUp to={needsHuman} /></b> need a person</span>
           <span className="chip"><b><CountUp to={escalations} /></b> escalated</span>
-          <Magnetic><Link className="btn light" href="/talk" style={{ display: "inline-flex", alignItems: "center", textDecoration: "none" }}>Talk to the agent</Link></Magnetic>
         </div>
       </div>
     </Cinema>
