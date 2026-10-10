@@ -51,8 +51,16 @@ check("escalation row created", esc === 1, String(esc));
 const notif = (await c.query("select status from notifications_log where dedupe_key = $1", [`brief-${id}-a`])).rows[0];
 check("email attempt is logged", !!notif, notif?.status);
 
-// cleanup
+// cleanup: remove test records from HubSpot first (notes, deals, contacts), then from the database
+const hsRows = (await c.query("select h.entity, h.hubspot_id from hubspot_sync_log h join calls c on c.lead_id = h.lead_id where c.vaani_call_id like $1 and h.status = 'ok'", [`${id}%`])).rows;
+check("HubSpot records created for the test calls (if a token is set)", !process.env.HUBSPOT_TOKEN || hsRows.length >= 3, `${hsRows.length} rows`);
+for (const kind of ["note", "deal", "contact"]) {
+  for (const row of hsRows.filter((x) => x.entity === kind)) {
+    await fetch(`https://api.hubapi.com/crm/v3/objects/${kind}s/${row.hubspot_id}`, { method: "DELETE", headers: { Authorization: `Bearer ${process.env.HUBSPOT_TOKEN}` } });
+  }
+}
 await c.query("begin");
+await c.query("delete from hubspot_sync_log where lead_id in (select lead_id from calls where vaani_call_id like $1)", [`${id}%`]);
 await c.query("delete from notifications_log where dedupe_key like $1", [`%${id}%`]);
 await c.query("create temp table _t as select id as call_id, lead_id from calls where vaani_call_id like $1", [`${id}%`]);
 await c.query("delete from cost_log where call_id in (select call_id from _t)");

@@ -130,6 +130,7 @@ export async function processCall(p: VaaniPost): Promise<Outcome> {
       });
       await pool.query("insert into hubspot_sync_log (lead_id, entity, hubspot_id, status) values ($1,'contact',$2,'ok')", [leadId, hs.contactId]);
       if (hs.dealId) await pool.query("insert into hubspot_sync_log (lead_id, entity, hubspot_id, status) values ($1,'deal',$2,'ok')", [leadId, hs.dealId]);
+      if (hs.noteId) await pool.query("insert into hubspot_sync_log (lead_id, entity, hubspot_id, status) values ($1,'note',$2,'ok')", [leadId, hs.noteId]);
     } catch (e) {
       await pool.query("insert into hubspot_sync_log (lead_id, entity, status, error) values ($1,'contact','failed',$2)", [leadId, (e as Error).message]);
       await pool.query("insert into notifications_log (kind, call_id, dedupe_key, status, body) values ('failure',$1,$2,'logged',$3) on conflict (dedupe_key) do nothing", [callId, `hs-${vaaniCallId}`, `HubSpot sync failed: ${(e as Error).message}`]);
