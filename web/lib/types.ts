@@ -27,6 +27,10 @@ export interface Lead {
   priceAsked: boolean;
   followUpNote: string | null;
   escalation: { promiseMinutes: number; startedAgoMinutes: number } | null;
+  callId?: string;
+  transcript?: string;
+  hasRecording?: boolean;
+  startedAt?: string;
 }
 
 export const TABS = ["Qualified", "Needs human", "Escalations", "Declined", "Follow-up"] as const;

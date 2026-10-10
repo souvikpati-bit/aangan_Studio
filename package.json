@@ -8,7 +8,10 @@
     "vaani:create": "node --env-file=.env scripts/vaani_create_agent.ts",
     "vaani:prompt": "node scripts/make_vaani_prompt.ts",
     "db:migrate": "node --no-warnings --env-file=.env scripts/db_migrate.ts",
-    "db:seed": "node --no-warnings --env-file=.env scripts/db_seed.ts"
+    "db:seed": "node --no-warnings --env-file=.env scripts/db_seed.ts",
+    "dev": "npm run dev --prefix web",
+    "test:webhook": "node --no-warnings --env-file=.env scripts/test_webhook.ts",
+    "user:create": "node --no-warnings --env-file=.env scripts/create_user.ts"
   },
   "dependencies": {
     "pg": "^8.23.1"

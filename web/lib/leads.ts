@@ -6,7 +6,7 @@ export type LeadRow = Lead & { overrideReason?: string; acked?: boolean };
 const SQL = `
 select l.ref, l.is_demo, l.name, l.phone, l.property_line, l.source, l.status, l.lead_flags, l.asked, l.price_asked,
        l.follow_up_note, l.consult_mode,
-       c.called_at_text, c.duration_text, c.summary,
+       c.called_at_text, c.duration_text, c.summary, c.vaani_call_id, c.transcript, c.recording_url, c.started_at,
        q.verdict, q.reason, q.score, q.notes, q.question, q.c1, q.c2, q.c3, q.c4, q.c5, q.override_reason,
        m.slot_text,
        e.promised_minutes, e.acknowledged_at,
@@ -16,7 +16,9 @@ left join lateral (select * from qualification_results x where x.lead_id = l.id 
 left join lateral (select * from calls x where x.lead_id = l.id order by x.created_at limit 1) c on true
 left join lateral (select * from meetings x where x.lead_id = l.id order by x.created_at desc limit 1) m on true
 left join lateral (select * from escalations x where x.lead_id = l.id order by x.created_at desc limit 1) e on true
-order by l.is_demo, l.ref`;
+order by l.is_demo, c.started_at desc nulls last, l.ref`;
+
+const IST = new Intl.DateTimeFormat("en-IN", { timeZone: "Asia/Kolkata", day: "numeric", month: "short", hour: "numeric", minute: "2-digit" });
 
 export async function getLeads(): Promise<LeadRow[]> {
   const { rows } = await db().query(SQL);
@@ -26,7 +28,7 @@ export async function getLeads(): Promise<LeadRow[]> {
     order: i,
     name: r.name ?? "Name not captured",
     phone: r.phone ?? "Number withheld",
-    calledAt: r.called_at_text ?? "",
+    calledAt: r.called_at_text ?? (r.started_at ? IST.format(new Date(r.started_at)) : ""),
     duration: r.duration_text ?? "",
     summary: r.summary ?? "",
     source: r.source ?? "—",
@@ -47,5 +49,10 @@ export async function getLeads(): Promise<LeadRow[]> {
     escalation: r.promised_minutes ? { promiseMinutes: r.promised_minutes, startedAgoMinutes: Number(r.esc_started_ago_min) } : null,
     overrideReason: r.override_reason ?? undefined,
     acked: !!r.acknowledged_at,
+    // Sample rows have no real Vaani call, so no transcript or recording is offered for them.
+    callId: r.vaani_call_id && !String(r.vaani_call_id).startsWith("sample-") ? r.vaani_call_id : undefined,
+    transcript: r.transcript ?? undefined,
+    hasRecording: !!r.recording_url,
+    startedAt: r.started_at && !String(r.vaani_call_id).startsWith("sample-") ? new Date(r.started_at).toISOString() : undefined,
   }));
 }

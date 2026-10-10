@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { extractFacts, parseFacts, splitTranscripts } from "../engine/extract.ts";
+import { extractFacts, extractFactsGemini, extractWith, parseFacts, splitTranscripts } from "../engine/extract.ts";
 
 test("seed file splits into 20 transcripts", () => {
   const md = readFileSync(new URL("../seed/phone_transcripts_T01-T20.md", import.meta.url), "utf8");
@@ -34,6 +34,25 @@ test("extractFacts calls the API with key + as_of and returns usage (mocked fetc
   assert.equal(r.usage.output_tokens, 5);
   assert.equal(seen!.headers["x-api-key"], "k");
   assert.ok(seen!.body.includes("2026-09-02"));
+});
+
+test("Gemini adapter sends key header + JSON mode and parses the reply (mocked fetch)", async () => {
+  let seen: { url: string; headers: Record<string, string>; body: string } | undefined;
+  const fake = (async (url: string, init: { headers: Record<string, string>; body: string }) => {
+    seen = { url, ...init };
+    return new Response(JSON.stringify({ candidates: [{ content: { parts: [{ text: '{"call_type":"new_lead","sqft":900}' }] } }], usageMetadata: { promptTokenCount: 7, candidatesTokenCount: 3 } }), { status: 200 });
+  }) as unknown as typeof fetch;
+  const r = await extractFactsGemini("T20 · hi", "2026-09-25", { apiKey: "g", fetchImpl: fake });
+  assert.equal(r.facts.sqft, 900);
+  assert.equal(r.usage.input_tokens, 7);
+  assert.equal(seen!.headers["x-goog-api-key"], "g");
+  assert.ok(seen!.url.includes("gemini-flash-latest") && !seen!.url.includes("key="));
+  assert.ok(seen!.body.includes("application/json") && seen!.body.includes("2026-09-25"));
+});
+
+test("extractWith picks the provider and refuses a missing key", async () => {
+  assert.throws(() => extractWith("gemini", "x", "2026-09-25", {}), /GEMINI_API_KEY/);
+  assert.throws(() => extractWith("claude", "x", "2026-09-25", {}), /ANTHROPIC_API_KEY/);
 });
 
 test("API error surfaces as an error (caller must keep the lead and alert the owner)", async () => {

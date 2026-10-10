@@ -11,7 +11,7 @@ const OVERRIDE_TO: Verdict[] = ["Qualified", "Needs human", "Not qualified"];
 const ICON = { pass: "✓", fail: "✕", unclear: "?" } as const;
 const NAMES = ["Real project", "Service area", "Timeline", "Budget", "Decision-maker"];
 
-export default function LeadCard({ lead, onChange }: { lead: LeadView; onChange: (patch: Partial<LeadView>) => void }) {
+export default function LeadCard({ lead, fresh, onChange }: { lead: LeadView; fresh?: boolean; onChange: (patch: Partial<LeadView>) => void }) {
   const [open, setOpen] = useState(false);
   const [overriding, setOverriding] = useState(false);
   const [newVerdict, setNewVerdict] = useState<Verdict>("Qualified");
@@ -36,7 +36,7 @@ export default function LeadCard({ lead, onChange }: { lead: LeadView; onChange:
   const showChecks = lead.verdict !== "Escalate" && lead.verdict !== "Missed" && lead.verdict !== "Closed";
 
   return (
-    <article className="card lead-card" data-flip-id={lead.id} aria-label={`${lead.name}, ${lead.verdict}`}>
+    <article className={`card lead-card${fresh ? " flash" : ""}`} data-flip-id={lead.id} aria-label={`${lead.name}, ${lead.verdict}`}>
       <div className="between">
         <div style={{ minWidth: 0 }}>
           <h3 style={{ fontSize: 24 }}>{lead.name}</h3>
@@ -89,8 +89,21 @@ export default function LeadCard({ lead, onChange }: { lead: LeadView; onChange:
             {showChecks && <><dt>Checks</dt><dd>{crit.map((x) => <div key={x.k}><span className={`chk ${x.c.result}`}>{ICON[x.c.result]}</span> {x.name}: <span className="muted">{x.c.note}</span></div>)}</dd></>}
             {lead.notes.length > 0 && <><dt>Note for designer</dt><dd>{lead.notes.join(" · ")}</dd></>}
             <dt>Already asked</dt><dd>{lead.asked.length ? lead.asked.join(", ") : "Nothing captured"} <span className="muted">(do not ask again)</span></dd>
-            <dt>Transcript</dt><dd className="muted">Available once live calls are connected</dd>
-            <dt>Recording</dt><dd className="muted">Available once live calls are connected</dd>
+            <dt>Recording</dt>
+            <dd>
+              {lead.callId && lead.hasRecording ? (
+                <audio controls preload="none" style={{ width: "100%", maxWidth: 360 }} src={`/api/calls/${encodeURIComponent(lead.callId)}/audio`} aria-label={`Recording of the call with ${lead.name}`} />
+              ) : <span className="muted">{lead.callId ? "No recording for this call" : "Sample call: no recording"}</span>}
+            </dd>
+            <dt>Transcript</dt>
+            <dd>
+              {lead.transcript ? (
+                <details>
+                  <summary style={{ cursor: "pointer", minHeight: 44, display: "flex", alignItems: "center" }}>Read the transcript</summary>
+                  <div style={{ whiteSpace: "pre-wrap", fontSize: 13, maxHeight: 280, overflow: "auto", padding: "8px 0" }}>{lead.transcript}</div>
+                </details>
+              ) : <span className="muted">{lead.callId ? "No transcript for this call" : "Sample call: no transcript"}</span>}
+            </dd>
             {lead.overrideReason && <><dt>Override</dt><dd>{lead.overrideReason}</dd></>}
           </dl>
 
